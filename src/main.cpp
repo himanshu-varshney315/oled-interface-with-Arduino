@@ -5,11 +5,24 @@
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
-#define OLED_ADDR 0x3C // I2C address for the OLED display
-
+#define OLED_ADDR  0x3C // I2C address for the OLED display
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT);
+
 void setup() {
 // write your initialization code here
+    Serial.begin(9600);
+    if (!display.begin(SSD1306_SWITCHCAPVCC,OLED_ADDR)) {
+        Serial.println("OLED not found");
+        while (true);
+    }
+    display.clearDisplay();
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0, 0);
+    display.println("Arduno UNO R4");
+    display.println("OlED with I2C");
+    display.println("Hello Student");
+    display.display();
 
 }
 
